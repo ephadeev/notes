@@ -1,12 +1,14 @@
 import {
     GET_NOTES_STARTED, GET_NOTES, GET_NOTES_FAILURE,
-    ON_CHANGE_NOTE, DELETE_NOTES} from '../types';
+    ON_CHANGE_NOTE_TEXT, ON_CHANGE_NOTE_AUTHOR, DELETE_NOTES, GET_TAGS} from '../types';
 
 let initialState = {
     notes: [],
     error: null,
+    newNoteAuthor: '',
     newNoteText: '',
-    isLoading: false
+    isLoading: false,
+    tags: []
 };
 
 const notesReducer = (state = initialState, action) => {
@@ -35,17 +37,36 @@ const notesReducer = (state = initialState, action) => {
             }
         }
         // create new notes
-        case ON_CHANGE_NOTE: {
+        case ON_CHANGE_NOTE_TEXT: {
             return {
                 ...state,
                 newNoteText: action.payload
+            }
+        }
+        case ON_CHANGE_NOTE_AUTHOR : {
+            return {
+                ...state,
+                newNoteAuthor: action.payload
             }
         }
         // delete notes
         case DELETE_NOTES: {
             return {
                 ...state,
-                notes: [...state.notes.filter(note => note.noteId !== action.payload)]
+                notes: [...state.notes.filter(note => note['_id'] !== action.payload)]
+            }
+        }
+        // get tags
+        case GET_TAGS: {
+            let arr = [...state.tags, ...action.payload].reduce((acc, tag) => {
+                if (acc.indexOf(tag) === -1) {
+                    acc.push(tag);
+                }
+                return acc;
+            }, []);
+            return {
+                ...state,
+                tags: arr
             }
         }
         // default

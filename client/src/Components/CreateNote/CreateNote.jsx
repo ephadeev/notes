@@ -2,16 +2,24 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import '../../dist/App.css';
-import {onChangeNote} from '../../Redux/actions/notes-actions';
+import {onChangeNoteText, onChangeNoteAuthor, getNotes} from '../../Redux/actions/notes-actions';
 
-const CreateNote = ({noteText, onChangeNote}) => {
+const CreateNote = ({noteAuthor, noteText, onChangeNoteText, onChangeNoteAuthor, getNotes}) => {
     const addNoteHandler = text => {
+        let note = {
+            username: noteAuthor,
+            text: noteText
+        }
+
         fetch('api/notes/add', {
             method: 'POST',
-            body: JSON.stringify()
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(note)
         })
             .then(response => response.json())
-            .then(result => console.log(result))
+            .then(() => getNotes())
             .catch(err => console.log(err.message))
     }
 
@@ -22,16 +30,24 @@ const CreateNote = ({noteText, onChangeNote}) => {
         }
     }
 
-    const onChange = event => onChangeNote(event.target.value);
+    const onChangeAuthor = event => onChangeNoteAuthor(event.target.value);
+    const onChangeText = event => onChangeNoteText(event.target.value);
 
     return (
         <div className='create-note'>
             <form>
+            <input 
+                    type='text'
+                    className='create-note__note-input'
+                    placeholder='Your Name...'
+                    onChange={onChangeAuthor}
+                    value={noteAuthor}
+                    required />
                 <input 
                     type='text'
                     className='create-note__note-input'
                     placeholder='write some note'
-                    onChange={onChange}
+                    onChange={onChangeText}
                     value={noteText}
                     required />
             </form>
@@ -45,17 +61,22 @@ const CreateNote = ({noteText, onChangeNote}) => {
 
 CreateNote.propTypes = {
     noteText: PropTypes.string,
-    onChangeNote: PropTypes.func
+    onChangeNoteText: PropTypes.func,
+    onChangeNoteAuthor: PropTypes.func,
+    getNotes: PropTypes.func
 }
 
 const mapStateToProps = state => {
     return {
-        noteText: state.notes.newNoteText
+        noteText: state.notes.newNoteText,
+        noteAuthor: state.notes.newNoteAuthor
     }
 }
 
 const mapDispatchToProps = {
-    onChangeNote
+    onChangeNoteText,
+    onChangeNoteAuthor,
+    getNotes
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateNote);

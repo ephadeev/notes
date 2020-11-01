@@ -4,9 +4,8 @@ const Schema = mongoose.Schema;
 
 const notesSchema = new Schema(
     {
-        username: {type: String, required: true, unique: true},
-        text: {type: String, required: true},
-        date: {type: Date, required: true}
+        username: {type: String, required: true, unique: false},
+        text: {type: String, required: true}
     },
     {
         timestamps: true

@@ -1,28 +1,38 @@
 import React from 'react';
-import '../../dist/App.css';
 import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
+import '../../dist/App.css';
 
-const Nav = () => {
+const Nav = ({tags}) => {
+    let liTags = tags.map((tag, index) => {
+        return <li key={index}><NavLink to={`/tag/${tag}`}>{tag}</NavLink></li>
+    })
+
     return (
         <nav className='nav'>
             <ul>
                 <li>
                     <i className="fas fa-chevron-down"></i><span>Tags</span>
                     <ul>
-                        <li>tag1</li>
-                        <li>tag2</li>
+                        {liTags}
                     </ul>
                 </li>
-                <li>
+                {/* <li>
                     <i className="fas fa-chevron-down"></i><span>Names</span>
                     <ul>
                         <li>name1</li>
                         <li>name2</li>
                     </ul>
-                </li>
+                </li> */}
             </ul>
         </nav>
     )
 }
 
-export default Nav;
+const mapStateToProps = state => {
+    return {
+        tags: state.notes.tags
+    }
+}
+
+export default connect(mapStateToProps)(Nav);

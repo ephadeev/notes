@@ -1,11 +1,15 @@
 import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import * as PropTypes from 'prop-types';
+import {Switch, Route} from 'react-router-dom';
 import './dist/App.css';
 import {getNotes} from './Redux/actions/notes-actions';
 import Header from './Components/Header/Header';
 import Nav from './Components/Nav/Nav';
 import CreateNote from './Components/CreateNote/CreateNote';
+import Notes from './Components/Notes/Notes';
 
-const App = () => {
+const App = ({getNotes, notes}) => {
   useEffect(() => getNotes(), []);
 
   return (
@@ -15,32 +19,33 @@ const App = () => {
         <Nav />
         <main className='main'>
           <CreateNote />
-          <div className='note'>
-            <div className='note__content'>
-              <h2 className='note__author'>Evgeniy Phadeev</h2>
-              <p>some new note</p>
-              <p className='note__tags'>#new</p>
-            </div>
-            <div className='note__settings'>
-              <div className='note__icon-container'><i className="fas fa-times"></i></div>
-              <div className='note__icon-container'><i className="fas fa-edit"></i></div>
-            </div>
-          </div>
-          <div className='note'>
-            <div className='note__content'>
-              <h2 className='note__author'>Evgeniy Phadeev</h2>
-              <p>some other new note</p>
-              <p className='note__tags'>#new #other</p>
-            </div>
-            <div className='note__settings'>
-              <div className='note__icon-container'><i className="fas fa-times"></i></div>
-              <div className='note__icon-container'><i className="fas fa-edit"></i></div>
-            </div>
-          </div>
+          <Switch>
+          <Route path='/'>
+            <Notes notes={notes} />
+          </Route>
+          <Route path='/tag/:index'>
+            <Notes notes={notes} />
+          </Route>
+          </Switch>
         </main>
       </div>
     </div>
   );
 }
 
-export default App;
+App.propTypes = {
+  getNotes: PropTypes.func,
+  notes: PropTypes.array
+}
+
+const mapStateToProps = state => {
+  return {
+      notes: state.notes.notes
+  }
+}
+
+const mapDispatchToProps = {
+  getNotes
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
