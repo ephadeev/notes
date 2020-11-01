@@ -1,0 +1,75 @@
+.header {
+  background-color: #282828;
+  padding: 10px;
+}
+.header__title {
+  color: white;
+  font-size: 28px;
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  height: calc(100vh - 28px - 10px - 10px);
+}
+
+.nav {
+  background-color: #282828;
+  color: white;
+  padding: 10px;
+}
+
+.main {
+  flex-grow: 1;
+  background-color: #1F1F1F;
+  color: white;
+}
+
+.note {
+  border: 1px solid white;
+  border-radius: 5px;
+  margin: 5px auto;
+  max-width: 800px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.note__author {
+  font-weight: bold;
+}
+.note:last-child {
+  margin-bottom: 0;
+}
+.note__settings {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.note__icon-container {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.note__icon-container:hover {
+  background-color: #313131;
+  cursor: pointer;
+}
+
+.create-note {
+  border: 1px solid white;
+  border-radius: 5px;
+  margin: 5px auto;
+  max-width: 800px;
+  padding: 10px;
+}
+.create-note__note-input {
+  width: calc(100% - 5px - 5px - 2px - 2px);
+  padding: 5px;
+  margin-bottom: 5px;
+}

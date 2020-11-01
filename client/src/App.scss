@@ -1,0 +1,86 @@
+$bg-main-color: #1F1F1F;
+$bg-secondary-color: #282828;
+
+@mixin flex-container($justify-content, $flex-direction) {
+    display: flex;
+    justify-content: $justify-content;
+    flex-direction: $flex-direction;
+}
+
+.header {
+    background-color: $bg-secondary-color;
+    padding: 10px;
+
+    &__title {
+        color: white;
+        font-size: 28px;
+        text-align: center;
+    }
+}
+
+.wrapper {
+    @include flex-container(space-between, row);
+    height: calc(100vh - 28px - 10px - 10px);
+}
+
+.nav {
+    background-color: $bg-secondary-color;
+    color: white;
+    padding: 10px;
+}
+
+.main {
+    flex-grow: 1;
+    background-color: $bg-main-color;
+    color: white;
+}
+
+.note {
+    border: 1px solid white;
+    border-radius: 5px;
+    margin: 5px auto;
+    max-width: 800px;
+    padding: 10px;
+
+    &__author {
+        font-weight: bold;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    @include flex-container(space-between, row);
+
+    &__settings {
+        @include flex-container(space-between, column);
+    }
+
+    &__icon-container {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__icon-container:hover {
+        background-color: #313131;
+        cursor: pointer;
+    }
+}
+
+.create-note {
+    border: 1px solid white;
+    border-radius: 5px;
+    margin: 5px auto;
+    max-width: 800px;
+    padding: 10px;
+
+    &__note-input {
+        width: calc(100% - 5px - 5px - 2px - 2px);
+        padding: 5px;
+        margin-bottom: 5px;
+    }
+}
