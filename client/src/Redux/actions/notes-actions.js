@@ -18,4 +18,4 @@ export const getNotes = () => {
 export const onChangeNote = note => ({type: ON_CHANGE_NOTE, payload: note});
 
 // delete notes
-export const deleteNotes = noteId = ({type: DELETE_NOTES, payload: noteId});
+export const deleteNotes = noteId => ({type: DELETE_NOTES, payload: noteId});

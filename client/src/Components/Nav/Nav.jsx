@@ -1,20 +1,20 @@
 import React from 'react';
-import '../../App.css';
+import '../../dist/App.css';
 import {NavLink} from 'react-router-dom';
 
 const Nav = () => {
     return (
-        <nav>
+        <nav className='nav'>
             <ul>
                 <li>
-                    V Tags
+                    <i className="fas fa-chevron-down"></i><span>Tags</span>
                     <ul>
                         <li>tag1</li>
                         <li>tag2</li>
                     </ul>
                 </li>
                 <li>
-                    V Names
+                    <i className="fas fa-chevron-down"></i><span>Names</span>
                     <ul>
                         <li>name1</li>
                         <li>name2</li>
