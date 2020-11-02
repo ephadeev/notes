@@ -11,6 +11,10 @@ $bg-secondary-color: #282828;
     background-color: $bg-secondary-color;
     padding: 10px;
 
+    &__link {
+        text-decoration: none;
+    }
+
     &__title {
         color: white;
         font-size: 28px;
@@ -27,6 +31,11 @@ $bg-secondary-color: #282828;
     background-color: $bg-secondary-color;
     color: white;
     padding: 10px;
+
+    &__tag {
+        text-decoration: none;
+        color: white;
+    }
 }
 
 .main {
@@ -68,6 +77,14 @@ $bg-secondary-color: #282828;
     &__icon-container:hover {
         background-color: #313131;
         cursor: pointer;
+    }
+
+    &__visible {
+        display: block;
+    }
+
+    &__unvisible {
+        display: none;
     }
 }
 

@@ -1,10 +1,12 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import Note from './Note';
+import CreateNote from '../CreateNote/CreateNote';
 
-const Notes = (props) => {
-    console.log(props);
-    let notesFromProps = props.notes.map((note, index) => {
+const Notes = ({notes}) => {
+
+    let notesFromProps = notes.map(note => {
         return <Note 
                     username={note.username} 
                     text={note.text}
@@ -15,6 +17,7 @@ const Notes = (props) => {
 
     return (
         <>
+            <CreateNote />
             {notesFromProps}
         </>
     )
@@ -24,4 +27,10 @@ Notes.propTypes = {
     notes: PropTypes.array
 }
 
-export default Notes;
+const mapStateToProps = state => {
+    return {
+        notes: state.notes.notes
+    }
+  }
+
+export default connect(mapStateToProps)(Notes);

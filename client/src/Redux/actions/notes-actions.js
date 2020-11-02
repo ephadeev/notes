@@ -9,7 +9,7 @@ const getNotesFailure = error => ({type: GET_NOTES_FAILURE, payload: {error}});
 export const getNotes = () => {
     return dispatch => {
         dispatch(getNotesStarted);
-        fetch('api/notes/')
+        fetch('http://localhost:5000/api/notes/')
             .then(response => response.json())
             .then(data => dispatch(setNotes(data)))
             .catch(err => dispatch(getNotesFailure(err)))

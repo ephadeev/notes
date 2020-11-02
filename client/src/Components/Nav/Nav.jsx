@@ -1,11 +1,12 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import '../../dist/App.css';
 
 const Nav = ({tags}) => {
     let liTags = tags.map((tag, index) => {
-        return <li key={index}><NavLink to={`/tag/${tag}`}>{tag}</NavLink></li>
+        let tag2 = tag.slice(1);
+        return <li key={index}><Link to={`/tag/${tag2}`} className='nav__tag'>{tag2}</Link></li>
     })
 
     return (

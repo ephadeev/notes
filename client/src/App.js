@@ -1,15 +1,15 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
-import {Switch, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import './dist/App.css';
 import {getNotes} from './Redux/actions/notes-actions';
 import Header from './Components/Header/Header';
 import Nav from './Components/Nav/Nav';
-import CreateNote from './Components/CreateNote/CreateNote';
 import Notes from './Components/Notes/Notes';
+import FilteredNotes from './Components/Notes/FilteredNotes';
 
-const App = ({getNotes, notes}) => {
+const App = ({getNotes}) => {
   useEffect(() => getNotes(), []);
 
   return (
@@ -18,15 +18,10 @@ const App = ({getNotes, notes}) => {
       <div className='wrapper'>
         <Nav />
         <main className='main'>
-          <CreateNote />
-          <Switch>
-          <Route path='/'>
-            <Notes notes={notes} />
+          <Route exact path='/'>
+            <Notes />
           </Route>
-          <Route path='/tag/:index'>
-            <Notes notes={notes} />
-          </Route>
-          </Switch>
+          <Route path='/tag/:index' component={FilteredNotes} />
         </main>
       </div>
     </div>
@@ -35,17 +30,10 @@ const App = ({getNotes, notes}) => {
 
 App.propTypes = {
   getNotes: PropTypes.func,
-  notes: PropTypes.array
-}
-
-const mapStateToProps = state => {
-  return {
-      notes: state.notes.notes
-  }
 }
 
 const mapDispatchToProps = {
   getNotes
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

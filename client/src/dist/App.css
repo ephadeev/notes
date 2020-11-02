@@ -2,6 +2,9 @@
   background-color: #282828;
   padding: 10px;
 }
+.header__link {
+  text-decoration: none;
+}
 .header__title {
   color: white;
   font-size: 28px;
@@ -19,6 +22,10 @@
   background-color: #282828;
   color: white;
   padding: 10px;
+}
+.nav__tag {
+  text-decoration: none;
+  color: white;
 }
 
 .main {
@@ -59,6 +66,12 @@
 .note__icon-container:hover {
   background-color: #313131;
   cursor: pointer;
+}
+.note__visible {
+  display: block;
+}
+.note__unvisible {
+  display: none;
 }
 
 .create-note {

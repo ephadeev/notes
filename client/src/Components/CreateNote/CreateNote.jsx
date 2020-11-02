@@ -11,16 +11,16 @@ const CreateNote = ({noteAuthor, noteText, onChangeNoteText, onChangeNoteAuthor,
             text: noteText
         }
 
-        fetch('api/notes/add', {
+        fetch('http://localhost:5000/api/notes/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(note)
         })
-            .then(response => response.json())
-            .then(() => getNotes())
-            .catch(err => console.log(err.message))
+                .then(response => response.json())
+                .then(() => getNotes())
+                .catch(err => console.log(err.message))
     }
 
     const addNote = event => {

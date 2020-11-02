@@ -1,15 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import * as PropTypes from 'prop-types';
 import Note from './Note';
+import {getNotes} from '../../Redux/actions/notes-actions';
 
-const FilteredNotes = ({notes, ownProps}) => {
-    let notesFromProps;
-
-    useEffect((notesFromProps) => {
-        console.log(ownProps.match.params.index);
-        notesFromProps = notes
-                            .filter(note => note.text.includes(ownProps.match.params.index))
+const FilteredNotes = ({notes, getNotes, ...ownProps}) => {
+    const [filteredNotes, setFilteredNotes] = useState(null);
+    useEffect(() => {
+        setFilteredNotes(notes
+                            .filter(note => note.text.includes(`#${ownProps.match.params.index}`))
                             .map(note => {
                                 return <Note 
                                             username={note.username} 
@@ -17,18 +16,19 @@ const FilteredNotes = ({notes, ownProps}) => {
                                             date={note.createdAt}
                                             id={note._id}
                                             key={note._id} />
-                            });
-    }, [ownProps.match.params.index])
+                            }));
+    }, [ownProps.match.params.index]);
 
     return (
         <>
-            {notesFromProps}
+            {filteredNotes}
         </>
     )
 }
 
 FilteredNotes.propTypes = {
-    notes: PropTypes.array
+    notes: PropTypes.array,
+    getNotes: PropTypes.func
 }
 
 const mapStateToProps = state => {
@@ -37,4 +37,8 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(FilteredNotes);
+const mapDispatchToProps = {
+    getNotes
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilteredNotes);
