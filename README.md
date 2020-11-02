@@ -1,9 +1,14 @@
-## Available Scripts
+## To start project follow this steps:
 
-In the project directory, you can run:
+First of all, in the root directory of project, run:
 
 ### `npm i`
-Installs required dependencies.<br />
+Installs required dependencies for backend.<br />
 
+Secondly, in the 'client' directory of project, run:
+### `npm i`
+Installs required dependencies for frontend.<br />
+
+And finelly in the root directory of project< run:
 ### `npm run dev`
 Runs the app in the development mode (both frontend and backend).<br />
